@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <body>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.image }}
+      <button class="btn btn-primary btn-xl" type="submit">Predict!!</button>
+    </form>
+    <div>
+      {% if input_img == None %}
+      <h4> No input image </h4>
+      {% else %}
+      <h4> input image </h4>
+      <img src="{{ MEDIA_ROOT }}{{ input_img.image.url }}" width="80%" height="80%" />
+      <br>
+      {% endif %}
+      {% if output_img %}
+      <h4> output image </h4>
+      <img src="/media/result.png" width="80%" height="80%" />
+      <br>
+      {% endif %}
+    </div>
+  </body>
+</html>
