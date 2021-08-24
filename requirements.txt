@@ -1,7 +1,7 @@
 absl-py==0.13.0
 antlr4-python3-runtime==4.8
 appdirs==1.4.4
-asgiref @ file:///tmp/build/80754af9/asgiref_1617740417847/work
+asgiref==3.3.4
 astroid @ file:///tmp/build/80754af9/astroid_1625075815977/work
 black==21.4b2
 cachetools==4.2.2
