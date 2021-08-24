@@ -18,7 +18,7 @@ Djangoの勉強のために作成したプロジェクトです。
 
 FAIRのdetectron2を利用しています。
 
-pipでのインストール方法は公式ドキュメントを参照してください。
+pipでのインストール方法は[公式ドキュメント](https://detectron2.readthedocs.io/en/latest/tutorials/install.html)を参照してください。
 
 実装時はCPUのみを使用しています。
 
