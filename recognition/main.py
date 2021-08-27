@@ -19,7 +19,13 @@ warnings.filterwarnings("ignore")
 
 def detect(img):
     """
-    img: path of input image
+    入力画像に対して物体検出を行う
+    
+    Input:
+        img (str): アップロードされた画像の相対パス
+    
+    Output:
+        output (str): 検出後の画像の相対パス
     """
     input_img = cv2.imread(img)
     cfg = get_cfg()
@@ -30,7 +36,7 @@ def detect(img):
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(
         "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")
     predictor = DefaultPredictor(cfg)
-    outputs = predictor(input_img)  # predict
+    outputs = predictor(input_img)
 
     # visualize (create image)
     v = Visualizer(

@@ -20,12 +20,11 @@ class PredictionView(FormView):
     def post(self, request, *args, **kwargs):
         form = PredictionForm(request.POST)
 
-        # 前回の画像を消す
+        # 前回の画像をディレクトリごと消して更新
         shutil.rmtree("media")
         os.mkdir("media")
         predict = Prediction()
         predict.image = request.FILES.get("image")
-        # 画像保存できてなさそう
         predict.save()
 
         input_img = Prediction.objects.order_by("-id").all()[0]
