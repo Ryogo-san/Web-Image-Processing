@@ -89,7 +89,7 @@ DATABASES = {
     }
 }
 
-db_from_env= dj_database_url.config(conn_max_age=600,ssl_require=True)
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)
 
 # Password validation
@@ -129,15 +129,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT=str(BASE_DIR)+"/media"
-MEDIA_URL="/media/"
+MEDIA_ROOT = str(BASE_DIR)+"/media"
+MEDIA_URL = "/media/"
 
 # local
 try:
@@ -147,6 +147,6 @@ except ImportError:
 
 # django_heroku
 if not DEBUG:
-    SECRET_KEY=os.environ["SECRET_KEY"]
+    SECRET_KEY = os.environ["SECRET_KEY"]
     import django_heroku
     django_heroku.settings(locals())
