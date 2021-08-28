@@ -8,4 +8,5 @@ app_name = 'recognition'
 urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
     path('prediction', views.PredictionView.as_view(), name="prediction"),
+    path('processing',views.ProcessingView.as_view(), name="processing")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
