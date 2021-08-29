@@ -17,17 +17,20 @@ setup_logger()
 warnings.filterwarnings("ignore")
 
 
-def detect(img):
+def detect(cfg, img):
     """
     入力画像に対して物体検出を行う
-    
+
     Input:
         img (str): アップロードされた画像の相対パス
-    
+
     Output:
         output (str): 検出後の画像の相対パス
     """
     input_img = cv2.imread(img)
+    #import time
+    # start=time.time()
+    """
     cfg = get_cfg()
     cfg.MODEL.DEVICE = "cpu"
     cfg.merge_from_file(model_zoo.get_config_file(
@@ -35,9 +38,14 @@ def detect(img):
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(
         "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")
+    """
     predictor = DefaultPredictor(cfg)
+    # process_time=time.time()-start
+    #print("config time: ",process_time)
+    # start_2=time.time()
     outputs = predictor(input_img)
-
+    # process_time2=time.time()-start_2
+    #print("prediction time: ",process_time2)
     # visualize (create image)
     v = Visualizer(
         input_img[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TRAIN[0]), scale=1.2)
