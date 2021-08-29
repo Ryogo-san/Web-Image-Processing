@@ -1,4 +1,5 @@
 import cv2
+import gc
 from detectron2.data import MetadataCatalog
 from detectron2.utils.visualizer import Visualizer
 from detectron2.engine import DefaultPredictor
@@ -35,6 +36,7 @@ def detect(cfg, img):
     v = Visualizer(
         input_img[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TRAIN[0]), scale=1.2)
     del cfg,predictor
+    gc.collect()
     out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
     result_img = out.get_image()[:, :, ::-1]
     output = "/media/result.png"
@@ -42,6 +44,7 @@ def detect(cfg, img):
     # save and return
     cv2.imwrite("media/result.png", result_img)
     del v,result_img,out
+    gc.collect()
     return output
 
 

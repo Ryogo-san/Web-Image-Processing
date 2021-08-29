@@ -31,7 +31,10 @@ class PredictionView(OperationView):
         super().upload(request, Prediction)
         input_img, input_img_path = super().before_operation(Prediction)
 
+        import time
+        start=time.time()
         output_img = detect(self.cfg, input_img_path)
+        print("detection time: ",time.time()-start)
         params = {
             "form": self.form_class,
             "input_img": input_img,
