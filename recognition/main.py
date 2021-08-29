@@ -26,24 +26,19 @@ def detect(cfg, img):
     input_img = cv2.imread(img)
 
     predictor = DefaultPredictor(cfg)
-    
-    import time
-    start=time.time()
+
     outputs = predictor(input_img)
-    print("prediction time: ",time.time()-start)
     # visualize (create image)
-    start2=time.time()
     v = Visualizer(
         input_img[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TRAIN[0]), scale=1.2)
-    del cfg,predictor
+    del cfg, predictor
     gc.collect()
     out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
     result_img = out.get_image()[:, :, ::-1]
     output = "/media/result.png"
-    print("result time: ",time.time()-start2)
     # save and return
     cv2.imwrite("media/result.png", result_img)
-    del v,result_img,out
+    del v, result_img, out
     gc.collect()
     return output
 

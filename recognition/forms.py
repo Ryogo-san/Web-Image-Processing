@@ -1,11 +1,11 @@
 from django import forms
-from .models import Prediction
+from .models import InputImage
 
 
-class PredictionForm(forms.ModelForm):
+class InputImageForm(forms.ModelForm):
     """
     画像フォームを定義
     """
     class Meta:
-        model = Prediction
+        model = InputImage
         fields = ("image",)

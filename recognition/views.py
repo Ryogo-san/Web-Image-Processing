@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from .main import *
-from .models import Prediction
-from .forms import PredictionForm
-from .operationView import OperationView
+from .models import InputImage
+from .forms import InputImageForm
+from .operation_view import OperationView
 
 from detectron2.config import get_cfg
 from detectron2 import model_zoo
@@ -15,7 +15,7 @@ class IndexView(TemplateView):
 
 class PredictionView(OperationView):
     template_name = "prediction.html"
-    form_class = PredictionForm
+    form_class = InputImageForm
 
     cfg = get_cfg()
     cfg.MODEL.DEVICE = "cpu"
@@ -26,15 +26,12 @@ class PredictionView(OperationView):
         "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")
 
     def post(self, request, *args, **kwargs):
-        form = PredictionForm(request.POST)
+        form = InputImageForm(request.POST)
 
-        super().upload(request, Prediction)
-        input_img, input_img_path = super().before_operation(Prediction)
+        super().upload(request, InputImage)
+        input_img, input_img_path = super().before_operation(InputImage)
 
-        import time
-        start=time.time()
         output_img = detect(self.cfg, input_img_path)
-        print("detection time: ",time.time()-start)
         params = {
             "form": self.form_class,
             "input_img": input_img,
@@ -46,13 +43,13 @@ class PredictionView(OperationView):
 
 class ProcessingView(OperationView):
     template_name = "processing.html"
-    form_class = PredictionForm
+    form_class = InputImageForm
 
     def post(self, request, *args, **kwargs):
-        form = PredictionForm(request.POST)
+        form = InputImageForm(request.POST)
 
-        super().upload(request, Prediction)
-        input_img, input_img_path = super().before_operation(Prediction)
+        super().upload(request, InputImage)
+        input_img, input_img_path = super().before_operation(InputImage)
 
         output_img = gray(input_img_path)
         params = {
